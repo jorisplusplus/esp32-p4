@@ -175,7 +175,6 @@ static void lcd() {
     ESP_LOGI(TAG, "Initialize MIPI DSI bus");
     esp_lcd_dsi_bus_handle_t mipi_dsi_bus = NULL;
     esp_lcd_dsi_bus_config_t bus_config = ST7703_PANEL_BUS_DSI_2CH_CONFIG();
-    bus_config.lane_bit_rate_mbps = 1500;
     ESP_ERROR_CHECK(esp_lcd_new_dsi_bus(&bus_config, &mipi_dsi_bus));
 
     ESP_LOGI(TAG, "Install panel IO");
@@ -187,7 +186,7 @@ static void lcd() {
     esp_lcd_panel_handle_t panel_handle = NULL;
     esp_lcd_dpi_panel_config_t dpi_config = {                                                    \
         .dpi_clk_src = MIPI_DSI_DPI_CLK_SRC_DEFAULT,     
-        .dpi_clock_freq_mhz = 42,                        
+        .dpi_clock_freq_mhz = 21,                        
         .virtual_channel = 0,                            
         .pixel_format = LCD_COLOR_PIXEL_FORMAT_RGB888,                       
         .num_fbs = 1,                                    
@@ -233,8 +232,8 @@ static void lcd() {
     for (int i = 0; i < (720*720*3); i++) {
         data[i] = 0x80;
     }
-    //esp_lcd_dpi_panel_set_pattern(panel_handle, MIPI_DSI_PATTERN_BAR_VERTICAL);
-    esp_lcd_panel_draw_bitmap(panel_handle, 0, 0, 720, 720, data);
+    esp_lcd_dpi_panel_set_pattern(panel_handle, MIPI_DSI_PATTERN_BAR_VERTICAL);
+    //esp_lcd_panel_draw_bitmap(panel_handle, 0, 0, 720, 720, data);
 }
 
 void app_main(void)

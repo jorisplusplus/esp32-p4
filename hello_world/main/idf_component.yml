@@ -16,4 +16,4 @@ dependencies:
   #   public: true
   espressif/esp_wifi_remote: '*'
   espressif/esp_hosted: '*'
-  espressif/esp_lcd_st7703: ^1.0.3
+  kevincoooool/esp_lcd_st7703: ^0.0.2
