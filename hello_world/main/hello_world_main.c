@@ -26,8 +26,8 @@
 
 
 /* Set the SSID and Password via project configuration, or can set directly here */
-#define DEFAULT_SSID "BeunNetwerk"
-#define DEFAULT_PWD "thetruewifi"
+#define DEFAULT_SSID "TBD"
+#define DEFAULT_PWD "TBD"
 
 #if CONFIG_EXAMPLE_WIFI_ALL_CHANNEL_SCAN
 #define DEFAULT_SCAN_METHOD WIFI_ALL_CHANNEL_SCAN
@@ -156,7 +156,7 @@ static const st7703_lcd_init_cmd_t custom_init[] = {
     // {0xC8, (uint8_t []){0x10, 0x40, 0x1E, 0x02}, 4, 0},
     
     
-    // {0xEF, (uint8_t []){0xFF, 0xFF, 0x01}, 3, 0},
+    //{0xEF, (uint8_t []){0xFF, 0xFF, 0x01}, 3, 0},
 
     {0x11, (uint8_t []){}, 0, 250},
     {0x29, (uint8_t []){}, 0, 50},
@@ -229,15 +229,12 @@ static void lcd() {
     ESP_ERROR_CHECK(esp_lcd_panel_disp_on_off(panel_handle, true));
     ESP_LOGI(TAG, "Panel on");
 
-    uint32_t *data = malloc(720*720*4);
-    for (int i = 0; i < (720*720); i++) {
-        data[i] = 0xFF00FF00;
+    uint8_t *data = malloc(720*720*3);
+    for (int i = 0; i < (720*720*3); i++) {
+        data[i] = 0x80;
     }
     //esp_lcd_dpi_panel_set_pattern(panel_handle, MIPI_DSI_PATTERN_BAR_VERTICAL);
     esp_lcd_panel_draw_bitmap(panel_handle, 0, 0, 720, 720, data);
-
-   
-
 }
 
 void app_main(void)
